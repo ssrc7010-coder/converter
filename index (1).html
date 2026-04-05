@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PixelPress — Image Converter</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <span class="logo-icon">⚡</span>
+      <span class="logo-text">PixelPress</span>
+    </div>
+    <p class="tagline">Lightning-fast image conversion. Under 200 KB. 250×250 pixels. Done.</p>
+  </header>
+
+  <!-- HERO STRIP -->
+  <div class="hero-strip">
+    <div class="badge"><span>✦</span> Under 200 KB</div>
+    <div class="divider-dot"></div>
+    <div class="badge"><span>✦</span> 250 × 250 px</div>
+    <div class="divider-dot"></div>
+    <div class="badge"><span>✦</span> JPEG · PNG · WEBP</div>
+    <div class="divider-dot"></div>
+    <div class="badge"><span>✦</span> Instant & Free</div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main>
+
+    <!-- UPLOAD ZONE -->
+    <section class="upload-section">
+      <div class="drop-zone" id="dropZone">
+        <div class="drop-inner">
+          <div class="drop-icon">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="8" y="14" width="48" height="36" rx="4" stroke="currentColor" stroke-width="2.5"/>
+              <circle cx="22" cy="27" r="5" stroke="currentColor" stroke-width="2.5"/>
+              <path d="M8 40 L20 29 L30 39 L40 30 L56 45" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+              <path d="M32 6 L32 32 M24 14 L32 6 L40 14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="drop-title">Drop images here</p>
+          <p class="drop-sub">or click to browse your files</p>
+          <label class="browse-btn" for="fileInput">Choose Files</label>
+          <input type="file" id="fileInput" multiple accept="image/*" hidden />
+          <p class="file-note">Supports JPG · PNG · WEBP · GIF · BMP · TIFF</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SETTINGS PANEL -->
+    <section class="settings-panel" id="settingsPanel">
+      <h2 class="section-title">Conversion Settings</h2>
+      <div class="settings-grid">
+
+        <!-- Mode A: Under 200KB -->
+        <div class="setting-card active" id="cardCompress" data-mode="compress">
+          <div class="card-check" id="checkCompress">✓</div>
+          <div class="card-icon">🗜</div>
+          <div class="card-info">
+            <strong>Smart Compress</strong>
+            <p>Reduce file size to under 200 KB while keeping max quality</p>
+          </div>
+        </div>
+
+        <!-- Mode B: 250x250 -->
+        <div class="setting-card active" id="cardResize" data-mode="resize">
+          <div class="card-check" id="checkResize">✓</div>
+          <div class="card-icon">⊞</div>
+          <div class="card-info">
+            <strong>Resize to 250×250</strong>
+            <p>Auto-crop or fit image to exactly 250×250 pixels</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Format Selector -->
+      <div class="format-row">
+        <label class="format-label">Output Format</label>
+        <div class="format-buttons">
+          <button class="fmt-btn active" data-fmt="jpeg">JPEG</button>
+          <button class="fmt-btn" data-fmt="png">PNG</button>
+          <button class="fmt-btn" data-fmt="webp">WEBP</button>
+        </div>
+      </div>
+
+      <!-- Resize Mode -->
+      <div class="resize-row" id="resizeModeRow">
+        <label class="format-label">Resize Mode</label>
+        <div class="format-buttons">
+          <button class="fmt-btn active" data-resize="cover">Cover (Crop)</button>
+          <button class="fmt-btn" data-resize="contain">Contain (Fit)</button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- QUEUE -->
+    <section class="queue-section" id="queueSection" style="display:none;">
+      <div class="queue-header">
+        <h2 class="section-title">Image Queue <span id="queueCount" class="count-badge">0</span></h2>
+        <div class="queue-actions">
+          <button class="btn-secondary" id="clearAllBtn">Clear All</button>
+          <button class="btn-primary" id="convertAllBtn">
+            <span>⚡</span> Convert All
+          </button>
+        </div>
+      </div>
+      <div class="queue-list" id="queueList"></div>
+    </section>
+
+    <!-- RESULTS -->
+    <section class="results-section" id="resultsSection" style="display:none;">
+      <div class="results-header">
+        <h2 class="section-title">Results <span id="resultCount" class="count-badge">0</span></h2>
+        <button class="btn-primary" id="downloadAllBtn"><span>⬇</span> Download All</button>
+      </div>
+      <div class="results-grid" id="resultsGrid"></div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>PixelPress &mdash; All processing happens in your browser. No uploads to servers. 100% private.</p>
+  </footer>
+
+  <!-- Hidden canvas for processing -->
+  <canvas id="processingCanvas" style="display:none;"></canvas>
+
+  <script src="script.js"></script>
+</body>
+</html>
